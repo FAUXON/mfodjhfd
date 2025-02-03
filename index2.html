@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 Crypto Mini-App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- En-tête -->
+        <header>
+            <h1>🚀 Crypto Mini-App</h1>
+            <p>Gagnez des tokens et explorez le monde des cryptomonnaies !</p>
+        </header>
+
+        <!-- Section Solde -->
+        <section class="balance-section">
+            <h2>Votre Solde</h2>
+            <div class="balance-card">
+                <span id="balanceAmount">0</span> Tokens
+                <div class="balance-progress">
+                    <div id="balanceProgressBar" class="progress-bar"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Actions -->
+        <section class="actions-section">
+            <h2>Actions Rapides</h2>
+            <div class="actions-grid">
+                <button id="earnTokensButton" class="action-button">
+                    <span>🎁</span>
+                    <span>Gagner des Tokens</span>
+                </button>
+                <button id="withdrawTokensButton" class="action-button">
+                    <span>💸</span>
+                    <span>Retirer des Tokens</span>
+                </button>
+                <button id="viewHistoryButton" class="action-button">
+                    <span>📜</span>
+                    <span>Historique</span>
+                </button>
+                <button id="settingsButton" class="action-button">
+                    <span>⚙️</span>
+                    <span>Paramètres</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Section Historique des Transactions -->
+        <section class="history-section" id="historySection">
+            <h2>Historique des Transactions</h2>
+            <ul id="transactionHistory"></ul>
+        </section>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</body>
+</html>
