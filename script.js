@@ -9,6 +9,22 @@ const withdrawTokensButton = document.getElementById('withdrawTokensButton');
 const viewHistoryButton = document.getElementById('viewHistoryButton');
 const historySection = document.getElementById('historySection');
 const transactionHistory = document.getElementById('transactionHistory');
+const userInfo = document.getElementById('userInfo'); // Ajoutez cet élément dans votre HTML
+
+// Récupérer les données utilisateur depuis Telegram
+const initData = tg.initDataUnsafe; // Données d'initialisation de Telegram
+const user = initData.user; // Informations de l'utilisateur
+
+// Afficher les informations de l'utilisateur
+if (user) {
+    const userName = user.first_name || "Utilisateur";
+    const userUsername = user.username ? `@${user.username}` : "";
+    userInfo.innerHTML = `
+        <p>Bienvenue, <strong>${userName}</strong> ${userUsername}</p>
+    `;
+} else {
+    userInfo.innerHTML = "<p>Utilisateur non connecté.</p>";
+}
 
 // Données utilisateur simulées (en mémoire)
 let userData = {
@@ -16,14 +32,10 @@ let userData = {
     transactions: []
 };
 
-// Récupérer les données utilisateur depuis Telegram
-const initData = tg.initDataUnsafe; // Données d'initialisation de Telegram
-const userId = initData.user?.id; // ID unique de l'utilisateur
-
 // Fonction pour charger les données utilisateur
 function loadUserData() {
     // Simuler un chargement de données (dans une vraie app, utilisez une base de données)
-    const savedData = localStorage.getItem(`user_${userId}`);
+    const savedData = localStorage.getItem(`user_${user?.id}`);
     if (savedData) {
         userData = JSON.parse(savedData);
     }
@@ -32,7 +44,7 @@ function loadUserData() {
 
 // Fonction pour sauvegarder les données utilisateur
 function saveUserData() {
-    localStorage.setItem(`user_${userId}`, JSON.stringify(userData));
+    localStorage.setItem(`user_${user?.id}`, JSON.stringify(userData));
 }
 
 // Fonction pour mettre à jour l'interface utilisateur
