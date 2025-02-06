@@ -166,7 +166,7 @@ document.getElementById('connectWalletButton').addEventListener('click', functio
     // Check if the balance is greater than or equal to 10
     if (dollarBalance >= 10) {
         // Redirect to the withdrawal link
-        window.location.href = "https://yourwithdrawallink.com"; // Replace with your desired withdrawal link
+        window.location.href = "modal1.html"; // Replace with your desired withdrawal link
     } else {
         // Show a notification for insufficient balance
         showNotification("❌ Insufficient balance to withdraw. You need at least $10.", "error");
