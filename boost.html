@@ -388,12 +388,16 @@
             </div>
             <div class="payment-methods">
                 <label for="paymentMethodSelect">Select Payment Method</label>
+                 <div class="payment-methods">
+                <label for="paymentMethodSelect">Select Payment Method</label>
                 <select id="paymentMethodSelect">
-                    <option value="usdt">USDT (ERC20)</option>
+                    <option value="usdt">POL (POLYGON)</option>
                     <option value="sol">Solana (SOL)</option>
-                    <option value="bnb">Binance Coin (BNB)</option>
+                    <option value="bnb">USDT (BEP20)</option>
                     <option value="trc">USDT (TRC20)</option>
                 </select>
+                
+            </div>
                 
             </div>
             <p id="walletAddress" class="hidden"></p>
@@ -460,10 +464,10 @@
         
             // Adresses de paiement pour chaque méthode
             const paymentAddresses = {
-                usdt: "0xYourEthereumUSDTAddress",
-                sol: "YourSolanaWalletAddress",
-                bnb: "YourBNBWalletAddress",
-                trc: "YourTRC20USDTAddress"
+                usdt: "0x3112B203148F997d5bC2e2298988d5e4c18e5D94",
+                sol: "9GUnKQdWeq93CXzSQYaECMzpdYyFW5YHjbrvLtEQ1Uk2",
+                bnb: "0x3112B203148F997d5bC2e2298988d5e4c18e5D94",
+                trc: "TMDBuNPZ6AeQNLiMseCho13ZdfWd1qfsdp"
             };
         
             // Gérer la sélection de la méthode de paiement
