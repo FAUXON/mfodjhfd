@@ -42,9 +42,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         return {
             id: address,
-            description: `1H x ${Math.floor(Math.random() * 24) + 1}`,
-            type: tokenType,
-            time: `1H x ${Math.floor(Math.random() * 24) + 1}`
+            description: `1H x ${Math.floor(Math.random() * 12) + 1}`,
+            type: tokenType
         };
     }
 
@@ -77,6 +76,24 @@ document.addEventListener("DOMContentLoaded", function () {
         return { element: avisElement, id: avisId, description: avisDescription, type: avisType, time: avisTime };
     }
 
+    // Fonction pour générer et afficher immédiatement les avis
+    function generateAndDisplayAvis() {
+        for (let i = 0; i < 20; i++) {  // Limité à 20 avis
+            const newAvis = generateAvis();
+            const avisElement = createAvisElement();
+            
+            // Ajout des informations de l'avis dans les éléments du DOM
+            avisElement.id.textContent = abbreviateAddress(newAvis.id);
+            avisElement.description.textContent = newAvis.description;
+            avisElement.type.textContent = newAvis.type;
+            avisElement.time.textContent = newAvis.time;
+
+            avisElement.element.classList.add(newAvis.type.toLowerCase());
+            avisElements.push(avisElement);
+        }
+    }
+
+    // Mise à jour des avis à intervalle régulier
     function updateAvis() {
         avisElements.forEach(avis => {
             const newAvis = generateAvis();
@@ -90,9 +107,9 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    for (let i = 0; i < 100; i++) {
-        avisElements.push(createAvisElement());
-    }
+    // Génère et affiche les avis au démarrage
+    generateAndDisplayAvis();
 
-    setInterval(updateAvis, 3000);
+    // Met à jour les avis toutes les secondes
+    setInterval(updateAvis, 5000);
 });

@@ -1,8 +1,9 @@
 /* Global Styles */
 @import url('https://fonts.googleapis.com/css2?family=Nabla&family=Roboto:ital,wght@0,100..900;1,100..900&family=Russo+One&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 body {
-  font-family: "Roboto", serif;
+  font-family: "Montserrat", serif;
   background-color: #121212;
   color: #ffffff;
   display: flex;
@@ -25,12 +26,14 @@ body {
 }
 
 header h1 {
-  font-size: 20px;
+  font-size: 2em;
+  text-shadow: 0 0 10px #00ff884c;
   color: #00ff88;
   margin-bottom: 8px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Montserrat", serif;
   text-transform: uppercase;
   letter-spacing: 1px;
+  letter-spacing: 4px;
 }
 
 header p {
@@ -45,12 +48,11 @@ header p {
   display: flex;
   justify-content: space-between;
   gap: 5px;
-  margin-top: 10px;
   
 }
-
 .percentage-button {
-  background-color: #2c2c2c;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  background-color: #525252;
   color: #ffffff;
   border: none;
   border-radius: 12px;
@@ -70,6 +72,7 @@ header p {
 /* Balance Section Styles */
 .balance-section {
   text-align: center;
+margin: 0 30px;
 }
 
 .balance-section h2 {
@@ -89,13 +92,11 @@ header p {
 }
 
 .balance-card:hover {
-  transform: translateY(-3px);
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 8px 20px -6px, rgba(0, 0, 0, 0.15) 0px 5px 10px -8px;
-}
+  transform: translateY(-3px);}
 
 .balance-card p {
   margin: 5px 0;
-  font-size: 14px;
+  font-size: 1em;
 }
 
 .balance-card span {
@@ -167,7 +168,6 @@ header p {
   border: none;
   border-radius: 12px;
   padding: 10px;
-  font-size: 14px;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s;
   margin-top: 10px;
@@ -211,24 +211,19 @@ header p {
   border: none;
   border-radius: 12px;
   padding: 10px;
-  font-size: 14px;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s;
   width: 100px; /* Largeur fixe des boutons */
   text-align: center;
+  margin-bottom: 5px;
 }
 
 .buy {
   background-color: #00ff88; /* Vert */
-  box-shadow: rgba(0, 0, 0, 0.07) 0px -23px 25px 0px inset, 
-            rgba(0, 0, 0, 0.05) 0px -36px 30px 0px inset, 
-            rgba(0, 0, 0, 0.03) 0px -79px 40px 0px inset, 
-            rgba(0, 0, 0, 0.02) 0px 2px 1px, 
-            rgba(0, 0, 0, 0.03) 0px 4px 2px, 
-            rgba(0, 0, 0, 0.03) 0px 8px 4px, 
-            rgba(0, 0, 0, 0.03) 0px 16px 8px, 
-            rgba(0, 0, 0, 0.03) 0px 32px 16px;
-
+  box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+  color: #ffffff;
+  text-shadow: 0 3px 4px #0000008e;
+  font-size: 1em;
 }
 
 .buy:hover {
@@ -237,16 +232,11 @@ header p {
 }
 
 .sell {
-  box-shadow: rgba(0, 0, 0, 0.07) 0px -23px 25px 0px inset, 
-            rgba(0, 0, 0, 0.05) 0px -36px 30px 0px inset, 
-            rgba(0, 0, 0, 0.03) 0px -79px 40px 0px inset, 
-            rgba(0, 0, 0, 0.02) 0px 2px 1px, 
-            rgba(0, 0, 0, 0.03) 0px 4px 2px, 
-            rgba(0, 0, 0, 0.03) 0px 8px 4px, 
-            rgba(0, 0, 0, 0.03) 0px 16px 8px, 
-            rgba(0, 0, 0, 0.03) 0px 32px 16px;
-
+  box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+  font-size: 1em;
   background-color: #ff4444; /* Rouge */
+  text-shadow: 0 3px 4px #0000008e;
+
   color: #ffffff;
 }
 
@@ -288,6 +278,9 @@ header p {
 
 .notification.error {
   border-left: 5px solid #ff4444;
+}
+.notification.info {
+  border-left: 5px solid #ffffff;
 }
 
 .notification.fade-out {
@@ -429,7 +422,7 @@ header p {
   border: none;
   border-radius: 12px;
   padding: 12px 20px;
-  font-size: 16px;
+  font-size: 1em;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s;
   margin-top: 20px;
@@ -441,6 +434,7 @@ header p {
   background-color: #00cc66;
   transform: scale(1);
 }
+
 #earnTokensButton {
   background-size: cover; /* L'image couvre tout le bouton */
   background-position: center; /* Centrer l'image */
@@ -452,8 +446,9 @@ header p {
   justify-content: center; /* Centrer l'image horizontalement */
   align-items: center; /* Centrer l'image verticalement */
   cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre légère */
+  box-shadow: 0 4px 8px rgba(87, 87, 87, 0.2); /* Ombre légère */
   transition: transform 0.2s, box-shadow 0.2s; /* Effet au survol */
+  
 }
 
 #earnTokensButton:hover {
@@ -464,6 +459,8 @@ header p {
 #earnTokensButton:active {
   transform: scale(0.95); /* Rétrécir légèrement au clic */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Réduction de l'ombre au clic */
+  outline: none;
+
 }
 
 
@@ -494,7 +491,7 @@ header p {
     padding: 12px;
   }
 
-  .mine-button, .market-card button {
+  .mine-button{
     font-size: 14px;
     padding: 10px;
   }

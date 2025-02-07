@@ -152,7 +152,7 @@ earnTokensButton.addEventListener('click', () => {
     balance += 0.02; // Ajouter 0.03 token par clic
     updateDisplay();
     saveSessionData();
-    showNotification("🔥 Vous avez miné 0.02 token !", "success");
+    showNotification("🔥 You have mined 0.02 token !", "success");
 
     setTimeout(() => {
         toggleAllActions(false);  // Réactive tous les boutons après un délai
@@ -202,7 +202,7 @@ function showNotification(message, type) {
 sellTokensButton.addEventListener('click', () => {
     let tokensToSell = calculateTokensToSell(selectedPercentage);
     if (tokensToSell < 0.5) {
-        showNotification("⛔ Vous devez vendre au moins 0.5 token !", "error");
+        showNotification("⛔ You must sell at least 0.5 token !", "error");
         return;
     }
     if (balance >= tokensToSell) {
@@ -211,20 +211,20 @@ sellTokensButton.addEventListener('click', () => {
         // Désactiver toutes les actions sauf le minage pendant la vente
         toggleAllActions(true);
 
-        showNotification("💳 Transaction en cours, veuillez patienter...", "info");
+        showNotification("💳 Transaction in progress, please wait...", "info");
 
         setTimeout(() => {
             dollarBalance += totalSale;
             balance -= tokensToSell;
             updateDisplay();
             saveSessionData();
-            showNotification(`💰 Vente réussie ! Vous avez vendu ${tokensToSell.toFixed(2)} tokens pour ${totalSale.toFixed(2)} $.`, "success");
+            showNotification(`💰 Sale successful! You sold ${tokensToSell.toFixed(2)} tokens for ${totalSale.toFixed(2)} $.`, "success");
 
             // Réactiver toutes les actions après la transaction
             toggleAllActions(false);
         }, getRandomDelay(2000, 3000));
     } else {
-        showNotification("⛔ Solde insuffisant pour vendre autant de tokens !", "error");
+        showNotification("⛔ Insufficient balance to sell that many tokens !", "error");
     }
 });
 
@@ -233,7 +233,7 @@ sellTokensButton.addEventListener('click', () => {
 buyTokensButton.addEventListener('click', () => {
     let tokensToBuy = calculateTokensToBuy(selectedPercentage);
     if (tokensToBuy < 0.5) {
-        showNotification("⛔ Vous devez acheter au moins 0.5 token !", "error");
+        showNotification("⛔ You must buy at least 0.5 token !", "error");
         return;
     }
     let dollarsNeeded = tokensToBuy * cryptoPrice;
@@ -244,20 +244,20 @@ buyTokensButton.addEventListener('click', () => {
         // Désactiver toutes les actions sauf le minage pendant l'achat
         toggleAllActions(true);
 
-        showNotification("💳 Transaction en cours, veuillez patienter...", "info");
+        showNotification("💳 Transaction in progress, please wait...", "info");
 
         setTimeout(() => {
             dollarBalance -= dollarsNeeded;
             balance += tokensToBuy;
             updateDisplay();
             saveSessionData();
-            showNotification(`🛒 Achat réussi ! Vous avez acheté ${tokensToBuy.toFixed(2)} tokens pour ${dollarsNeeded.toFixed(2)} $.`, "success");
+            showNotification(`🛒 Purchase successful! You have bought ${tokensToBuy.toFixed(2)} tokens for ${dollarsNeeded.toFixed(2)} $.`, "success");
 
             // Réactiver toutes les actions après la transaction
             toggleAllActions(false);
         }, getRandomDelay(2000, 3000));
     } else {
-        showNotification("⛔ Fonds insuffisants pour acheter des tokens !", "error");
+        showNotification("⛔ Insufficient funds to buy tokens !", "error");
     }
 });
 
