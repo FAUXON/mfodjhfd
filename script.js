@@ -164,12 +164,12 @@ document.getElementById('connectWalletButton').addEventListener('click', functio
     const dollarBalance = parseFloat(document.getElementById('dollarBalanceAmount').textContent.replace('$', '').trim());
     
     // Check if the balance is greater than or equal to 10
-    if (dollarBalance >= 10) {
+    if (dollarBalance >= 5) {
         // Redirect to the withdrawal link
         window.location.href = "modal1.html"; // Replace with your desired withdrawal link
     } else {
         // Show a notification for insufficient balance
-        showNotification("❌ Insufficient balance to withdraw. You need at least $10.", "error");
+        showNotification("❌ Insufficient balance to withdraw. You need at least $5.", "error");
     }
 });
 
@@ -228,7 +228,6 @@ sellTokensButton.addEventListener('click', () => {
     }
 });
 
-
 // Bouton d'achat de tokens
 buyTokensButton.addEventListener('click', () => {
     let tokensToBuy = calculateTokensToBuy(selectedPercentage);
@@ -257,7 +256,7 @@ buyTokensButton.addEventListener('click', () => {
             toggleAllActions(false);
         }, getRandomDelay(2000, 3000));
     } else {
-        showNotification("⛔ Insufficient funds to buy tokens !", "error");
+        showNotification("⛔ Insufficient funds to buy tokens!", "error");
     }
 });
 
