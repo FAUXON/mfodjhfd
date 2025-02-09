@@ -420,6 +420,7 @@ margin: 0 30px;
 .connect-wallet-button {
   background-color: #00ff88;
   color: #ffff;
+  text-shadow:0 3px 4px #0000008e;
   border: none;
   border-radius: 12px;
   padding: 12px 20px;
