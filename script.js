@@ -96,9 +96,10 @@ document.getElementById("close").addEventListener("click", function() {
 // Lors du clic sur le bouton de partage
 document.getElementById("share").addEventListener("click", function() {
     if (!hasClaimedReward) {
-        let message = encodeURIComponent("🔥 Join me on Earn&TradeBullX and earn crypto rewards! 🚀💰 \n👇 Click here: https://t.me/earntradebullx");
+        let message = encodeURIComponent("🔥 Join me on Earn&TradeBullX and earn crypto rewards! 🚀💰 \n👇 Click here: https://t.me/EarnX10Bot");
         let telegramUrl = `https://t.me/share/url?url=${message}`;
         
+        // Open the sharing link in a new window
         window.open(telegramUrl, "_blank");
 
         hasShared = true;
@@ -116,14 +117,16 @@ document.getElementById("share").addEventListener("click", function() {
             localStorage.setItem(`rewardMessage_${userId}`, "🎉 Thank you for sharing! You have earned your crypto reward!");
 
             rewardUserForSharing(); // Call the reward function
-        }, 1500); // Delay of 500 milliseconds (0.5 seconds)
+        }, 500); // Delay of 500 milliseconds (0.5 seconds)
     } else {
-        let message = encodeURIComponent("🔥 Join me on Earn&TradeBullX and earn crypto rewards! 🚀💰 \n👇 Click here: https://t.me/earntradebullx");
+        let message = encodeURIComponent("🔥 Join me on Earn&TradeBullX and earn crypto rewards! 🚀💰 \n👇 Click here: https://t.me/EarnX10Bot");
         let telegramUrl = `https://t.me/share/url?url=${message}`;
         
+        // Open the sharing link in a new window
         window.open(telegramUrl, "_blank");
     }
 });
+
 
 
 // Lors du chargement de la page, vérifier si un message de récompense a déjà été affiché
