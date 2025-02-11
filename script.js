@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let lastPrice = cryptoPrice; // Pour afficher la tendance (gain/perte)
     let autoMineInterval;    // Intervalle pour le minage automatique
 
+    
     /*------------------------------
       Gestion de la session (localStorage)
     -------------------------------*/
@@ -50,6 +51,174 @@ document.addEventListener('DOMContentLoaded', () => {
             button.disabled = disable;
         });
     }
+// Initialisation des variables
+let hasShared = localStorage.getItem(`hasShared_${userId}`) === "true";
+let hasClaimedReward = localStorage.getItem(`hasClaimedReward_${userId}`) === "true";
+
+// Charger les données utilisateur
+function loadSessionData() {
+    const savedBalance = localStorage.getItem(`balance_${userId}`);
+    const savedDollarBalance = localStorage.getItem(`dollarBalance_${userId}`);
+    const savedCryptoPrice = localStorage.getItem(`cryptoPrice_${userId}`);
+
+    if (savedBalance) balance = parseFloat(savedBalance);
+    if (savedDollarBalance) dollarBalance = parseFloat(savedDollarBalance);
+    if (savedCryptoPrice) cryptoPrice = parseFloat(savedCryptoPrice);
+
+    updateDisplay();
+
+    // Vérifier si la récompense a été réclamée et changer l'image au chargement
+    if (hasClaimedReward) {
+        document.getElementById("reward").querySelector("img").src = "rewardDone.png";
+    }
+}
+
+// Enregistrer l'état de la session
+function saveSessionData() {
+    localStorage.setItem(`balance_${userId}`, balance);
+    localStorage.setItem(`dollarBalance_${userId}`, dollarBalance);
+    localStorage.setItem(`cryptoPrice_${userId}`, cryptoPrice);
+    localStorage.setItem(`hasShared_${userId}`, hasShared);
+    localStorage.setItem(`hasClaimedReward_${userId}`, hasClaimedReward);
+}
+
+// Afficher la carte de récompense
+document.getElementById("reward").addEventListener("click", function() {
+    document.getElementById("cardReward").style.display = "block";
+});
+
+// Fermer la carte de récompense
+document.getElementById("close").addEventListener("click", function() {
+    document.getElementById("cardReward").style.display = "none";
+});
+
+// Gérer le partage sur Telegram
+// Lors du clic sur le bouton de partage
+document.getElementById("share").addEventListener("click", function() {
+    if (!hasClaimedReward) {
+        let message = encodeURIComponent("🔥 Join me on Earn&TradeBullX and earn crypto rewards! 🚀💰 \n👇 Click here: https://t.me/earntradebullx");
+        let telegramUrl = `https://t.me/share/url?url=${message}`;
+        
+        window.open(telegramUrl, "_blank");
+
+        hasShared = true;
+        localStorage.setItem(`hasShared_${userId}`, "true");
+
+        // Add delay of 0.5 seconds before changing the text
+        setTimeout(function() {
+            // Change the text after sharing
+            document.getElementById("cardReward").querySelector("p").textContent = "🎉 Thank you for sharing! You have earned your crypto reward!";
+            
+            // Modify the button text
+            document.getElementById("share").textContent = "Share Completed!";
+            
+            // Save the new text to localStorage
+            localStorage.setItem(`rewardMessage_${userId}`, "🎉 Thank you for sharing! You have earned your crypto reward!");
+
+            rewardUserForSharing(); // Call the reward function
+        }, 1500); // Delay of 500 milliseconds (0.5 seconds)
+    } else {
+        let message = encodeURIComponent("🔥 Join me on Earn&TradeBullX and earn crypto rewards! 🚀💰 \n👇 Click here: https://t.me/earntradebullx");
+        let telegramUrl = `https://t.me/share/url?url=${message}`;
+        
+        window.open(telegramUrl, "_blank");
+    }
+});
+
+
+// Lors du chargement de la page, vérifier si un message de récompense a déjà été affiché
+window.addEventListener("load", function() {
+    if (localStorage.getItem(`hasShared_${userId}`) === "true") {
+        // Récupérer les textes enregistrés
+        const rewardMessage = localStorage.getItem(`rewardMessage_${userId}`);
+        const shareButtonText = localStorage.getItem(`shareButtonText_${userId}`);
+
+        // Mettre à jour le texte de la carte et du bouton
+        if (rewardMessage) {
+            document.getElementById("cardReward").querySelector("p").textContent = rewardMessage;
+        }
+        if (shareButtonText) {
+            document.getElementById("share").textContent = shareButtonText;
+        }
+    }
+});
+
+
+const launchCryptoConfetti = () => {
+    const duration = 1.5 * 1000; // Durée en millisecondes
+    const animationEnd = Date.now() + duration;
+
+    // Couleurs adaptées au thème sombre, avec du vert néon, bleu et violet
+    const colors = ["#00FF00", "#32CD32", "#00FFFF", "#8A2BE2"];
+
+    const frame = () => {
+        confetti({
+            particleCount: 4, // Moins de particules pour un effet plus subtil
+            angle: 90, // Dispersion depuis la gauche (particules vers la droite)
+            spread: 60, // Dispersion plus petite
+            origin: { x: 0 }, // Confettis sortent de la gauche
+            decay: 0.9, // Légèrement plus lent pour un effet plus doux
+            scalar: 1.0, // Taille normale des particules
+            colors: colors,
+            gravity: 0.3, // Gravity pour un effet plus léger
+        });
+
+        confetti({
+            particleCount: 4, // Moins de particules
+            angle: 90, // Dispersion depuis la droite (particules vers la gauche)
+            spread: 60, // Dispersion plus petite
+            origin: { x: 1 }, // Confettis sortent de la droite
+            decay: 0.9,
+            scalar: 1.0,
+            colors: colors,
+            gravity: 0.3,
+        });
+
+        // Vérifier si l'animation doit continuer
+        if (Date.now() < animationEnd) {
+            requestAnimationFrame(frame); // Relancer l'animation si la durée n'est pas terminée
+        }
+    };
+
+    frame(); // Lancer l'animation
+};
+
+// Vérifier si l'utilisateur revient sur la page et donner la récompense une seule fois
+window.addEventListener("focus", () => {
+    if (hasShared && !hasClaimedReward) {
+        launchCryptoConfetti(); // Afficher les confettis
+        rewardUserForSharing(); // Récompenser l'utilisateur
+        hasClaimedReward = true;
+        localStorage.setItem(`hasClaimedReward_${userId}`, "true");
+    }
+});
+
+
+
+
+// Fonction pour récompenser l'utilisateur après partage
+function rewardUserForSharing() {
+    toggleAllActions(true);
+
+    dollarBalance += 2;
+    updateDisplay();
+    saveSessionData();
+    showNotification("🎉 You have earned $2 for sharing!", "success");
+
+    document.getElementById("reward").querySelector("img").src = "rewardDone.png";
+    localStorage.setItem(`hasClaimedReward_${userId}`, "true"); // Assurer la persistance
+
+    setTimeout(() => {
+        toggleAllActions(false);
+    }, getRandomDelay(2000, 3000));
+}
+
+// Charger les données utilisateur au démarrage
+loadSessionData();
+
+
+
+    
     
     /*------------------------------
       Mise à jour de l'affichage
@@ -72,18 +241,28 @@ document.addEventListener('DOMContentLoaded', () => {
     -------------------------------*/
     function updateCryptoPrice() {
         lastPrice = cryptoPrice;
-        // Variation aléatoire entre -10% et +10%
-        let change = (Math.random() * 0.20 - 0.10) * cryptoPrice;
+    
+        // Facteur de tendance (si prix récent monte, plus de chances qu'il continue)
+        let trendFactor = Math.random() > 0.6 ? 1 : -1; 
+    
+        // Variation de base entre -8% et +12%
+        let change = (Math.random() * 0.20 - 0.08) * cryptoPrice * trendFactor;
+    
+        // Simulation d’un pump/dump aléatoire (1 chance sur 10)
+        if (Math.random() < 0.1) {
+            change *= (Math.random() * 3 + 1.5); // Multiplie la variation par 1.5 à 4
+        }
+    
         cryptoPrice += change;
-
+    
         // Limiter le prix entre 0.2000$ et 1.2300$
         if (cryptoPrice < 0.2000) cryptoPrice = 0.2000;
         if (cryptoPrice > 1.2300) cryptoPrice = 1.2300;
-
+    
         updateDisplay();
         saveSessionData();
     }
-
+    
     /*------------------------------
       Notifications
     -------------------------------*/
@@ -149,7 +328,7 @@ percentageButtons.forEach(button => {
 earnTokensButton.addEventListener('click', () => {
     toggleAllActions(true);  // Désactive tous les boutons sauf le minage
 
-    balance += 0.02; // Ajouter 0.03 token par clic
+    balance += 0.02; // Ajouter 0.02 token par clic
     updateDisplay();
     saveSessionData();
     showNotification("🔥 You have mined 0.02 token !", "success");
@@ -282,4 +461,3 @@ function getRandomDelay(min, max) {
         stopAutoMining();
     });
 });
-
